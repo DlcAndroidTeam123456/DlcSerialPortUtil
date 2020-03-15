@@ -4,6 +4,7 @@ import android.content.Context;
 import android.serialport.SerialPort;
 import android.serialport.SerialPortFinder;
 
+
 /**
  * Created by Administrator on 2018\5\14 0014.
  */

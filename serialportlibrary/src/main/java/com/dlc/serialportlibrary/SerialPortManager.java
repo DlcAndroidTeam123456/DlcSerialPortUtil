@@ -5,6 +5,7 @@ import android.database.Observable;
 import android.os.HandlerThread;
 import android.serialport.SerialPort;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -54,7 +55,7 @@ public class SerialPortManager {
         try {
             File device = new File(devicePath);
             int baurate = Integer.parseInt(baudrateString);
-            mSerialPort = new SerialPort(device, baurate, 0);
+            mSerialPort = SerialPort.newBuilder(devicePath, Integer.parseInt(baudrateString)).build();
 
             mReadThread = new SerialReadThread(devicePath, baudrateString, mSerialPort.getInputStream());
             mReadThread.start();
