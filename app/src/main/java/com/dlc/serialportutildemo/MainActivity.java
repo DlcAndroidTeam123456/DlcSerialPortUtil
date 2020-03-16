@@ -14,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         DLCSerialPortUtil.getInstance().getAllDevicesPath();
-        SerialPortManager manager = DLCSerialPortUtil.getInstance().open("/dev/ttyS0", "115200");
-        Log.e("SerialPortManager","manager:"+manager.isOpenSuccess());
+//        SerialPortManager manager = DLCSerialPortUtil.getInstance().open("/dev/ttyS0", "115200");
+//        Log.e("SerialPortManager","manager:"+manager.isOpenSuccess());
     }
 }

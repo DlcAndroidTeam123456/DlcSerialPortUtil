@@ -46,6 +46,20 @@ public class SerialPortManager {
      * @return
      */
     public SerialPort open(String devicePath, String baudrateString) {
+        return open(devicePath, baudrateString, 0, 8, 1);
+    }
+
+    /**
+     * 打开串口
+     *
+     * @param devicePath
+     * @param baudrateString
+     * @param parity         校验位；0:无校验位(NONE，默认)；1:奇校验位(ODD);2:偶校验位(EVEN)
+     * @param dataBits       数据位,默认8；可选值为5~8
+     * @param stopBits       停止位，默认1；1:1位停止位；2:2位停止位
+     * @return
+     */
+    public SerialPort open(String devicePath, String baudrateString, int parity, int dataBits, int stopBits) {
         this.devicePath = devicePath;
         this.baudrateString = baudrateString;
         if (mSerialPort != null) {
@@ -53,9 +67,8 @@ public class SerialPortManager {
         }
 
         try {
-            File device = new File(devicePath);
-            int baurate = Integer.parseInt(baudrateString);
-            mSerialPort = SerialPort.newBuilder(devicePath, Integer.parseInt(baudrateString)).build();
+            mSerialPort = SerialPort.newBuilder(devicePath, Integer.parseInt(baudrateString)).
+                    parity(parity).dataBits(dataBits).stopBits(stopBits).build();
 
             mReadThread = new SerialReadThread(devicePath, baudrateString, mSerialPort.getInputStream());
             mReadThread.start();
